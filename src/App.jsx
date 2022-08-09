@@ -1,34 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
+import {Header} from "./components/base/Header.jsx";
+import {Route, Routes} from "react-router-dom";
+import {Footer} from "./components/base/Footer.jsx";
+import {CarsList} from "./pages/CarsList.jsx";
+import {CarDetail} from "./pages/CarDetail.jsx";
+import {Profile} from "./pages/Profile.jsx";
+import {NotFound} from "./pages/NotFound.jsx";
+import {Login} from "./pages/Login.jsx";
+import {Register} from "./pages/Register";
+import {Provider} from "react-redux";
+import store from "./store";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <Provider store={store}>
+      <main>
+        <Header/>
+        <Routes>
+          <Route path="/" element={<CarsList/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/cars/:carId" element={<CarDetail/>}/>
+          <Route path="/user" element={<Profile/>}/>
+          <Route path="*" element={<NotFound/>}/>
+        </Routes>
+        <Footer/>
+      </main>
+    </Provider>
+  );
 }
 
-export default App
+export default App;
