@@ -30,6 +30,19 @@ export function carsReducer(state = carInitialState, action) {
   }
 }
 
+export function carEditReducer(state = carInitialState, action) {
+  switch (action.type) {
+    case 'car-edit-request':
+      return {loading: true, car: null, error: null};
+    case 'car-edit-success':
+      return {loading: false, car: action.payload, error: null};
+    case 'car-edit-error':
+      return {loading: false, car: null, error: action.payload};
+    default:
+      return state;
+  }
+}
+
 const carDeleteInitialState = {
   loading: false,
   deleted: false,

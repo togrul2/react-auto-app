@@ -39,24 +39,28 @@ export function CarsList() {
         <div className="d-flex justify-content-between">
           <h1 className="my-5">Cars List</h1>
           <Form className="d-flex align-items-center">
-            <Form.Select aria-label="Default select example" onChange={sortHandle}>
-              <option value="">----</option>
+            <Form.Group controlId="sort">
+              <Form.Label>Sort</Form.Label>
 
-              <option value="model">Model asc.</option>
-              <option value="-model">Model desc.</option>
+              <Form.Select aria-label="Default select example" onChange={sortHandle}>
+                <option value="">----</option>
 
-              <option value="brand">Brand asc.</option>
-              <option value="-brand">Brand desc.</option>
+                <option value="model">Model asc.</option>
+                <option value="-model">Model desc.</option>
 
-              <option value="category">Category asc.</option>
-              <option value="-category">Category desc.</option>
+                <option value="brand">Brand asc.</option>
+                <option value="-brand">Brand desc.</option>
 
-              <option value="price">Price asc.</option>
-              <option value="-price">Price desc.</option>
+                <option value="category">Category asc.</option>
+                <option value="-category">Category desc.</option>
 
-              <option value="year">Year asc.</option>
-              <option value="-year">Year desc.</option>
-            </Form.Select>
+                <option value="price">Price asc.</option>
+                <option value="-price">Price desc.</option>
+
+                <option value="year">Year asc.</option>
+                <option value="-year">Year desc.</option>
+              </Form.Select>
+            </Form.Group>
           </Form>
 
         </div>

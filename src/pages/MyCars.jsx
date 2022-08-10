@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {deleteCarAction, getMyCarsAction} from "../actions/carActions.js";
 import {Loader} from "../components/Loader";
+import {Link} from "react-router-dom";
 
 function Car(props) {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function Car(props) {
       <td>{props.car.price}</td>
       <td>{props.car.year}</td>
       <td className='d-flex gap-1'>
-        <Button>Edit</Button>
+        <Link className="btn btn-primary" to={`/cars/${props.car.id}/edit`}>Edit</Link>
         <Button onClick={() => deleteHandler(props.car.id)}>Delete</Button>
       </td>
     </tr>

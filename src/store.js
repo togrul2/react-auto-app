@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {loginReducer, registerReducer, userReducer} from "./reducers/authReducers.js";
-import {carDeleteReducer, carReducer, carsReducer} from "./reducers/carReducer.js";
+import {carDeleteReducer, carEditReducer, carReducer, carsReducer} from "./reducers/carReducer.js";
 
 // Token info in localStorage
 const tokenInfo = localStorage.getItem('tokens');
@@ -20,6 +20,7 @@ export default configureStore({
     userInfo: userReducer,
     carInfo: carReducer,
     carsInfo: carsReducer,
+    carEdit: carEditReducer,
     carDelete: carDeleteReducer
   },
 });

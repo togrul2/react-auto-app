@@ -9,9 +9,7 @@ export function getCarsAction(sort = null) {
     }
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: {'Content-Type': 'application/json',},
     });
 
     const data = await response.json();
@@ -20,6 +18,22 @@ export function getCarsAction(sort = null) {
       dispatch({type: 'cars-success', payload: data});
     } else {
       dispatch({type: 'cars-error', payload: data});
+    }
+  }
+}
+
+export function getCarDetailsAction(carId) {
+  return async function (dispatch) {
+    dispatch({type: 'car-request'});
+    const response = await fetch(`${base_url}/api/cars/${carId}`, {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    });
+    const data = await response.json();
+    if (response.status === 200) {
+      dispatch({type: 'car-success', payload: data});
+    } else {
+      dispatch({type: 'car-error', payload: data});
     }
   }
 }
@@ -69,6 +83,30 @@ export function getMyCarsAction() {
       }
     } else {
       dispatch({type: 'cars-error', payload: 'No auth token.'})
+    }
+  }
+}
+
+export function editCarAction(carId, carData) {
+  return async function (dispatch) {
+    dispatch({type: 'car-edit-request'});
+    const tokens = JSON.parse(localStorage.getItem('tokens'));
+    if (tokens !== null) {
+      const response = await fetch(`${base_url}/api/cars/${carId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tokens['access']}`
+        },
+        body: JSON.stringify(carData)
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        dispatch({type: 'car-edit-success', payload: data});
+      } else {
+        const data = await response.json();
+        dispatch({type: 'car-edit-error', payload: data});
+      }
     }
   }
 }
