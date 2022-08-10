@@ -48,7 +48,12 @@ export function Register() {
 
   return (
     <Container>
-      <div style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}>
+      <div style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
         {loading ? <Loader/> : (
           <Form onSubmit={registerHandler}>
             <h1>Register at Auto net.</h1>

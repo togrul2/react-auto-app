@@ -10,6 +10,8 @@ import {Login} from "./pages/Login.jsx";
 import {Register} from "./pages/Register";
 import {Provider} from "react-redux";
 import store from "./store";
+import {CarAdd} from "./pages/CarAdd.jsx";
+import {MyCars} from "./pages/MyCars.jsx";
 
 function App() {
   return (
@@ -20,8 +22,10 @@ function App() {
           <Route path="/" element={<CarsList/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
+          <Route path="/cars/add" element={<CarAdd/>}/>
           <Route path="/cars/:carId" element={<CarDetail/>}/>
-          <Route path="/user" element={<Profile/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/profile/cars" element={<MyCars/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
         <Footer/>

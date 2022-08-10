@@ -46,3 +46,22 @@ export function registerReducer(state = registerInitialState, action) {
       return state;
   }
 }
+
+const userInitialState = {
+  loading: false,
+  user: null,
+  error: null
+}
+
+export function userReducer(state = userInitialState, action) {
+  switch (action.type) {
+    case 'user-request':
+      return {loading: true, user: null, error: null};
+    case 'user-success':
+      return {loading: false, user: action.payload, error: null};
+    case 'user-error':
+      return {loading: false, user: null, error: action.payload};
+    default:
+      return state;
+  }
+}

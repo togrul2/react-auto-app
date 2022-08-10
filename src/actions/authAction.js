@@ -50,3 +50,52 @@ export function registerAction(userData) {
     }
   }
 }
+
+export function userRetrieveAction() {
+  return async function(dispatch) {
+    dispatch({type: 'user-request'});
+    const tokens = JSON.parse(localStorage.getItem('tokens'));
+    if (tokens !== null) {
+      const response = await fetch(`${base_url}/api/user`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tokens['access']}`
+        }
+      });
+      const data = await response.json();
+      if (response.status !== 200) {
+        dispatch({type: 'user-error', payload: data});
+      } else {
+        dispatch({type: 'user-success', payload: data});
+      }
+    } else {
+      dispatch({type: 'user-error', payload: 'No auth token.'});
+    }
+  }
+}
+
+export function userUpdateAction(body) {
+  return async function(dispatch) {
+    dispatch({type: 'user-request'});
+    const tokens = JSON.parse(localStorage.getItem('tokens'));
+    if (tokens !== null) {
+      const response = await fetch(`${base_url}/api/user`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tokens['access']}`
+        },
+        body: JSON.stringify(body)
+      });
+      const data = await response.json();
+      if (response.status !== 200) {
+        dispatch({type: 'user-error', payload: data});
+      } else {
+        dispatch({type: 'user-success', payload: data});
+      }
+    } else {
+      dispatch({type: 'user-error', payload: 'No auth token.'});
+    }
+  }
+}
